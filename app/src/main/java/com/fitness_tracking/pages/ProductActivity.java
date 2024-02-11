@@ -168,14 +168,5 @@ public class ProductActivity extends AppCompatActivity {
         Produit produit=new Produit(productId,productName,calorie,protein,carbs,fats,id);
         databaseHandler.updateProduit(produit);
 
-        /*databaseHandler=new DatabaseHandler(context);
-        dataArrayList = databaseHandler.getAllProduitsForUser(id);
-        listAdapter = new ProductAdapter(context,context, dataArrayList);
-
-        dataArrayList.clear();
-
-        dataArrayList.addAll(databaseHandler.getAllProduitsForUser(id));
-        Toast.makeText(context, "Veuillez saisir toutes les informations."+dataArrayList.size(), Toast.LENGTH_SHORT).show();
-        listAdapter.notifyDataSetChanged();*/
     }
 }

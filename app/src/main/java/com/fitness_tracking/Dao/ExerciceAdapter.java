@@ -1,11 +1,15 @@
 package com.fitness_tracking.Dao;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +21,7 @@ import com.fitness_tracking.auth.SessionManager;
 import com.fitness_tracking.entities.Exercice;
 
 import java.util.List;
+import com.bumptech.glide.Glide;
 
 public class ExerciceAdapter extends ArrayAdapter<Exercice> {
 
@@ -38,10 +43,13 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
 
         TextView exerciceName = view.findViewById(R.id.exerciceName);
         TextView exerciceDescription = view.findViewById(R.id.exerciceDescription);
+        ImageView image=view.findViewById(R.id.exerciceImage);
 
         if (listData != null) {
             exerciceName.setText(listData.getName());
             exerciceDescription.setText(listData.getDescription());
+            Bitmap ee= BitmapFactory.decodeFile(listData.getPath());
+            image.setImageBitmap(ee);
         }
 
         ImageButton btnDeleteExercice = view.findViewById(R.id.btnDeleteExercice);
