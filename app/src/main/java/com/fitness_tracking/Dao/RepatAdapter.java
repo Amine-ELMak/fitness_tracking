@@ -79,6 +79,8 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
         return view;
     }
 
+
+    
     private void deleteRepat(long repatId) {
         DatabaseHandler databaseHandler = new DatabaseHandler(getContext());
         databaseHandler.deleteRepat(repatId);
