@@ -254,6 +254,5 @@ public class WorkoutActivity extends AppCompatActivity {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
         Workout workout=new Workout(workoutId,null,weight,serie,repetition,new Date(),id);
         databaseHandler.updateWorkout(workout);
-
     }
 }

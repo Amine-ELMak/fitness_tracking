@@ -12,26 +12,39 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/exerciceImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Adjust the margins and positioning of other components accordingly -->
         <TextView
             android:id="@+id/exerciceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exercise Name"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimary"
+            android:layout_below="@id/exerciceImage"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:text="Exercise Name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/exerciceDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exercise Description"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimary"
             android:layout_below="@id/exerciceName"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="25dp"
+            android:text="Exercise Description"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/btnDeleteExercice"
@@ -40,7 +53,7 @@
             android:src="@drawable/baseline_delete_24"
             android:backgroundTint="@color/white"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/exerciceDescription"
             android:layout_marginEnd="8dp"
             android:contentDescription="Delete Exercise"/>
 
@@ -51,7 +64,7 @@
             android:src="@drawable/baseline_edit_24"
             android:backgroundTint="@color/white"
             android:layout_toStartOf="@id/btnDeleteExercice"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/exerciceDescription"
             android:layout_marginEnd="8dp"
             android:contentDescription="Edit Exercise"/>
     </RelativeLayout>
