@@ -35,6 +35,11 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".pages.ProfileActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
             android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
