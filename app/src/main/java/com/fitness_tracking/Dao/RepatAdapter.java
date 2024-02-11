@@ -80,7 +80,7 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
     }
 
 
-    
+
     private void deleteRepat(long repatId) {
         DatabaseHandler databaseHandler = new DatabaseHandler(getContext());
         databaseHandler.deleteRepat(repatId);
