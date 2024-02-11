@@ -276,6 +276,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         sqLiteDatabase.close();
     }
+    @SuppressLint("Range")
+    public Exercice getExerciseById(long id) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Exercice exercise = null;
+
+        Cursor cursor = sqLiteDatabase.query(
+                "EXERCICE", // Table name
+                new String[] {"id", "name", "path", "description", "id_user"}, // Columns to retrieve
+                "id=?", // Selection criteria (WHERE clause)
+                new String[] {String.valueOf(id)}, // Selection arguments
+                null, // GROUP BY
+                null, // HAVING
+                null // ORDER BY
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // Construct the Exercise object from the cursor data
+            exercise = new Exercice(
+                    cursor.getLong(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("name")),
+                    cursor.getString(cursor.getColumnIndex("path")),
+                    cursor.getString(cursor.getColumnIndex("description")),
+                    cursor.getLong(cursor.getColumnIndex("id_user"))
+            );
+            cursor.close();
+        }
+
+        return exercise;
+    }
+
 
     @SuppressLint("Range")
     public List<Exercice> getAllExercicesForUser(long userId) {
@@ -383,6 +413,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         sqLiteDatabase.close();
     }
+
+    @SuppressLint("Range")
+    public Produit getProduitById(long id) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Produit produit = null;
+
+        Cursor cursor = sqLiteDatabase.query(
+                "PRODUIT",
+                new String[] {"id", "name", "calorie", "proteine", "carbe", "fate", "id_user"},
+                "id=?", // Selection criteria (WHERE clause)
+                new String[] {String.valueOf(id)},
+                null, // GROUP BY
+                null, // HAVING
+                null // ORDER BY
+        );
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                // Ensure that the cursor has at least one row
+                // Construct the Produit object from the cursor data
+                produit = new Produit(
+                        cursor.getLong(cursor.getColumnIndex("id")),
+                        cursor.getString(cursor.getColumnIndex("name")),
+                        cursor.getDouble(cursor.getColumnIndex("calorie")),
+                        cursor.getDouble(cursor.getColumnIndex("proteine")),
+                        cursor.getDouble(cursor.getColumnIndex("carbe")),
+                        cursor.getDouble(cursor.getColumnIndex("fate")),
+                        cursor.getLong(cursor.getColumnIndex("id_user"))
+                );
+            }
+            cursor.close();
+        }
+
+        return produit;
+    }
+
 
     @SuppressLint("Range")
     public List<Produit> getAllProduitsForUser2(long id) {

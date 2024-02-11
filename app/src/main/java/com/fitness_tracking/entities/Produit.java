@@ -85,4 +85,8 @@ public class Produit {
     public Produit() {
         super();
     }
+
+    public String toString() {
+        return this.getName();
+    }
 }

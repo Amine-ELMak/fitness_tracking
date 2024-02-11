@@ -64,4 +64,8 @@ public class Exercice {
         super();
     }
 
+    public String toString() {
+        return this.getName();
+    }
+
 }

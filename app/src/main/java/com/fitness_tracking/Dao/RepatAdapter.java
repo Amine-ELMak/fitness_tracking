@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.fitness_tracking.R;
 import com.fitness_tracking.auth.SessionManager;
+import com.fitness_tracking.entities.Produit;
 import com.fitness_tracking.entities.Repat;
 import com.fitness_tracking.pages.WorkoutActivity;
 
@@ -36,6 +37,7 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         Repat repatData = getItem(position);
+        DatabaseHandler db=new DatabaseHandler(activityContext);
         if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.card_repat_item, parent, false);
         }
@@ -44,8 +46,9 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
         TextView repatDate = view.findViewById(R.id.repDate);
         TextView repatWeight = view.findViewById(R.id.repWeight);
 
-        if (repatData != null) {
-            repatName.setText("Name: " );
+        if (repatData != null && repatData.getIdProduit()!=0) {
+            Produit p=db.getProduitById(repatData.getIdProduit());
+            repatName.setText(p.getName());
             repatWeight.setText("Weight: " + repatData.getWeight());
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String formattedDate = dateFormat.format(repatData.getDate());

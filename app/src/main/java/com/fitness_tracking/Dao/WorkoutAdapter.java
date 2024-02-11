@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.fitness_tracking.R;
 import com.fitness_tracking.auth.SessionManager;
+import com.fitness_tracking.entities.Exercice;
 import com.fitness_tracking.entities.Repat;
 import com.fitness_tracking.entities.Workout;
 import com.fitness_tracking.pages.WorkoutActivity;
@@ -37,6 +38,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         Workout workoutData = getItem(position);
+        DatabaseHandler db=new DatabaseHandler(activityContext);
         if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.card_workout_item, parent, false);
         }
@@ -46,8 +48,10 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
         TextView workoutRepetition = view.findViewById(R.id.workoutRepetition);
         TextView workoutDate = view.findViewById(R.id.workoutDate);
 
-        if (workoutData != null) {
-            workoutName.setText("Name: " );
+        if (workoutData != null && workoutData.getIdExercice()!=0) {
+            Exercice ex=db.getExerciseById(workoutData.getIdExercice());
+
+            workoutName.setText(ex.getName());
             workoutWeight.setText("Weight: " + String.valueOf(workoutData.getWeight()));
             workoutRepetition.setText("Repetition: " + String.valueOf(workoutData.getRepetition()));
 
