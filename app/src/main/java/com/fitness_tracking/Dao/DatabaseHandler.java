@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
@@ -222,23 +223,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void updateUser(User user) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues contentValues = getUserContentValues(user);
-
+        SQLiteDatabase sqLiteDatabase = null;
         try {
-            int rowsAffected = sqLiteDatabase.update("USER", contentValues, "id = ?", new String[]{String.valueOf(user.getId())});
-
+            sqLiteDatabase = this.getWritableDatabase();
+            ContentValues contentValues = getUserContentValues(user);
+            int rowsAffected = sqLiteDatabase.update("user", contentValues, "id = ?", new String[]{String.valueOf(user.getId())});
             if (rowsAffected > 0) {
                 Log.d("DatabaseHandler", "User updated successfully");
             } else {
-                Log.d("DatabaseHandler", "Failed to update user");
+                Log.d("DatabaseHandler", "No rows affected, user might not exist");
             }
-        } catch (Exception e) {
-            Log.e("DatabaseHandler", "Error while updating user", e);
+        } catch (SQLiteException e) {
+            Log.e("DatabaseHandler", "SQLiteException while updating user", e);
         } finally {
-            sqLiteDatabase.close();
+            if (sqLiteDatabase != null) {
+                sqLiteDatabase.close();
+            }
         }
     }
+
 
     public void updateExercice(Exercice exercice) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
