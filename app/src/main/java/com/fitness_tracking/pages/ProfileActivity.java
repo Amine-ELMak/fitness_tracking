@@ -1,14 +1,17 @@
 package com.fitness_tracking.pages;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +19,8 @@ import com.fitness_tracking.Dao.DatabaseHandler;
 import com.fitness_tracking.R;
 import com.fitness_tracking.auth.SessionManager;
 import com.fitness_tracking.entities.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class ProfileActivity extends AppCompatActivity {
     Long id = -1L;
@@ -31,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView textViewWeight ;
     TextView textViewHeight ;
     TextView textViewSex ;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,37 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showEditProfileDialog();
+            }
+        });
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.person);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.person) {
+                    Toast.makeText(ProfileActivity.this, "person", Toast.LENGTH_SHORT).show();
+                    return true;
+
+                } else if (id == R.id.home) {
+                    Intent intent4 = new Intent(ProfileActivity.this, WorkoutActivity.class);
+                    startActivity(intent4);
+                    return true;
+
+                } else if (id == R.id.fitness) {
+                    Intent intent4 = new Intent(ProfileActivity.this, ProductActivity.class);
+                    startActivity(intent4);
+                    return true;
+
+                } else if (id == R.id.workout) {
+                    Intent intent4 = new Intent(ProfileActivity.this, ExerciceActivity.class);
+                    startActivity(intent4);
+                    return true;
+                }
+                return false;
             }
         });
     }

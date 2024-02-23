@@ -2,7 +2,7 @@ package com.fitness_tracking.auth;
 import com.fitness_tracking.Dao.DatabaseHandler;
 import com.fitness_tracking.R;
 import com.fitness_tracking.entities.User;
-import com.fitness_tracking.pages.ProfileActivity;
+import com.fitness_tracking.pages.WorkoutActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                                     SessionManager.getInstance().loginUser(user);
                                     // Now we have the logged user data
                                     Toast.makeText(LoginActivity.this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), WorkoutActivity.class);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Connexion échoué.", Toast.LENGTH_SHORT).show();
