@@ -143,4 +143,7 @@
         android:layout_height="wrap_content"
         android:text=" Edit"/>
 
+    <include
+        layout="@layout/navbar"/>
+
 </LinearLayout>

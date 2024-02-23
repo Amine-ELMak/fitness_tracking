@@ -87,8 +87,8 @@ public class ExerciceActivity extends AppCompatActivity {
                 int id=item.getItemId();
 
                 if(id==R.id.person) {
-                    Toast.makeText(ExerciceActivity.this, "person", Toast.LENGTH_SHORT).show();
-
+                    Intent intent4 = new Intent(ExerciceActivity.this, ProfileActivity.class);
+                    startActivity(intent4);
                     return true;
 
                 }else
