@@ -33,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -272,8 +273,12 @@ public class WorkoutActivity extends AppCompatActivity {
 
     private void saveRepatDatabase(double wei,Long ProduitId) {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
-        Repat repat=new Repat(null,ProduitId,wei,new Date(),id);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -2);
+        Date yesterday = calendar.getTime();
+        Repat repat=new Repat(null,ProduitId,wei,yesterday,id);
         Long saved=databaseHandler.addRepat(repat);
+
         if (saved != -1) {
             Toast.makeText(WorkoutActivity.this, "id saved :"+saved, Toast.LENGTH_SHORT).show();
             dataRepatArrayList.clear();
