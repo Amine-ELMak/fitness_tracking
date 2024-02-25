@@ -46,7 +46,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
         TextView workoutName = view.findViewById(R.id.workoutName);
         TextView workoutWeight = view.findViewById(R.id.workoutWeight);
         TextView workoutRepetition = view.findViewById(R.id.workoutRepetition);
-        TextView workoutDate = view.findViewById(R.id.workoutDate);
+
 
         if (workoutData != null && workoutData.getIdExercice()!=0) {
             Exercice ex=db.getExerciseById(workoutData.getIdExercice());
@@ -57,7 +57,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String formattedDate = dateFormat.format(workoutData.getDate());
-            workoutDate.setText("Date: " + formattedDate);
+
         }
 
         ImageButton btnDeleteWorkout = view.findViewById(R.id.btnDeleteWorkout);

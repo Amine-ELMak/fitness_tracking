@@ -42,17 +42,10 @@
             android:textSize="16sp"
             android:layout_below="@+id/workoutWeight"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="30dp"/>
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/workoutDate"
-            android:text="Date: Placeholder Date"
-            android:textSize="16sp"
-            android:layout_below="@+id/workoutRepetition"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="30dp"/>
+
 
         <ImageButton
             android:id="@+id/btnDeleteWorkout"

@@ -22,19 +22,8 @@
             android:text="Name"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="30dp"/>
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:id="@+id/repDate"
-            android:text="Date"
-            android:textSize="16sp"
-            android:layout_toEndOf="@id/repName"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="100dp"
-            android:textColor="@color/colorPrimary"/>
+            android:layout_marginStart="30dp"
+            />
 
         <TextView
             android:layout_width="80dp"
@@ -42,9 +31,7 @@
             android:id="@+id/repWeight"
             android:text="Weight"
             android:textSize="16sp"
-            android:layout_below="@+id/repName"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="150dp"
             android:textColor="@color/colorPrimary"/>
 
         <ImageButton

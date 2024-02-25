@@ -43,7 +43,6 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
         }
 
         TextView repatName = view.findViewById(R.id.repName);
-        TextView repatDate = view.findViewById(R.id.repDate);
         TextView repatWeight = view.findViewById(R.id.repWeight);
 
         if (repatData != null && repatData.getIdProduit()!=0) {
@@ -52,7 +51,7 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
             repatWeight.setText("Weight: " + repatData.getWeight());
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String formattedDate = dateFormat.format(repatData.getDate());
-            repatDate.setText("Date: " + formattedDate);
+
         }
 
         ImageButton btnDeleteRepat = view.findViewById(R.id.btnDeleteRep);
