@@ -36,9 +36,6 @@ public class ChartActivity extends AppCompatActivity {
         BarChart barChart = findViewById(R.id.barChart);
 
         Long id = SessionManager.getInstance().getCurrentUser().getId();
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDateString=dateFormat.format(currentDate);
         Set<String> dateList=DB.getDistinctFormattedDatesForUser(id);
 
         List<Float> consumptionValues = new ArrayList<>();
