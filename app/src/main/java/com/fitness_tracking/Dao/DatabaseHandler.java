@@ -7,8 +7,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.ParseException;
 import android.util.Log;
 import android.widget.Toast;
+
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -20,11 +22,16 @@ import com.fitness_tracking.entities.Produit;
 import com.fitness_tracking.entities.Repat;
 import com.fitness_tracking.entities.User;
 import com.fitness_tracking.entities.Workout;
+import com.fitness_tracking.pages.WorkoutActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -187,18 +194,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public boolean checkUserCredentials(String email, String password) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM user WHERE email = ? AND password = ?", new String[]{email, password});
+    Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM user WHERE email = ? AND password = ?", new String[]{email, password});
 
         try {
-            if (cursor.getCount()>0) {
-                return true;
-            } else {
-                return false;
-            }
-        } finally {
-            cursor.close();
+        if (cursor.getCount()>0) {
+            return true;
+        } else {
+            return false;
         }
+    } finally {
+        cursor.close();
     }
+}
 
     public boolean saveUser(User user) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -220,6 +227,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } finally {
             sqLiteDatabase.close();
         }
+    }
+
+    public Set<String> getDistinctFormattedDatesForUser(long userId) {
+        Set<String> formattedDateSet = new HashSet<>();
+        List<Repat> repats = getAllRepatsForUser(userId);
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        for (Repat repat : repats) {
+            try {
+                Date date = repat.getDate();
+                String formattedDate = outputDateFormat.format(date);
+                formattedDateSet.add(formattedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return formattedDateSet;
+    }
+
+
+    public double getTotalWeightForDateAndUser(String date, long userId) {
+        double total=0;
+        List<Repat> repats=getAllRepatsForUser(userId);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for(Repat repat:repats){
+            if(date.equals(dateFormat.format(repat.getDate()))) {
+                total+= (repat.getWeight()/100)*getProduitById(repat.getIdProduit()).getCalorie() ;
+            }
+        }
+        return total;
     }
 
     public void updateUser(User user) {
