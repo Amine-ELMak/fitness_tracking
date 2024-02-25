@@ -96,7 +96,7 @@ public class WorkoutActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.person) {
-                    Intent intent4 = new Intent(WorkoutActivity.this,  ChartActivity.class);
+                    Intent intent4 = new Intent(WorkoutActivity.this, ProfileActivity.class);
                     startActivity(intent4);
                     return true;
 
