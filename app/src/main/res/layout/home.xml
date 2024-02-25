@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".pages.WorkoutActivity">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/repatBlock"
         android:layout_width="0dp"
@@ -42,7 +43,7 @@
 
         <Button
             android:id="@+id/btnAddRepat"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -60,7 +61,9 @@
         app:layout_constraintTop_toBottomOf="@+id/repatBlock"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="70dp"
+        >
 
         <TextView
             android:id="@+id/titleWorkout"
@@ -88,7 +91,7 @@
 
         <Button
             android:id="@+id/btnAddWorkout"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
