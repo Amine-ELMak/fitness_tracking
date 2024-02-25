@@ -41,45 +41,35 @@ public class ChartActivity extends AppCompatActivity {
         String currentDateString=dateFormat.format(currentDate);
         Set<String> dateList=DB.getDistinctFormattedDatesForUser(id);
 
-        Toast.makeText(ChartActivity.this, "the size list date is : "+dateList.size(), Toast.LENGTH_SHORT).show();
-
         List<Float> consumptionValues = new ArrayList<>();
-        consumptionValues.add((float) DB.getTotalWeightForDateAndUser(currentDateString,id));
-        consumptionValues.add(1.55f);
-        consumptionValues.add(1.4f);
-        consumptionValues.add(2.4f);
-
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1; // Months are 0-indexed
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
-        int[] previousMonthYear = new int[]{1,1};
-        int previousMonth = previousMonthYear[0];
-        int previousYear = previousMonthYear[1];
-
         List<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, consumptionValues.get(0))); // Actual month
-        entries.add(new BarEntry(1, consumptionValues.get(1)));
-        entries.add(new BarEntry(2, consumptionValues.get(2)));// Previous month
-        entries.add(new BarEntry(3, consumptionValues.get(3)));
+        ArrayList<String> labels = new ArrayList<>();
 
-        BarDataSet barDataSet = new BarDataSet(entries, "Monthly Consumption");
+        int i=0;
+        for(String dddd: dateList){
+            consumptionValues.add((float) DB.getTotalWeightForDateAndUser(dddd,id));
+            entries.add(new BarEntry(i, consumptionValues.get(i)));
+            labels.add(dddd);
+            i++;
+        }
+
+        BarDataSet barDataSet = new BarDataSet(entries, "Total Calories(daily)");
+        barDataSet.setColors(new int[]{getResources().getColor(R.color.colorPrimary)});
+        barChart.getDescription().setEnabled(false);
         BarData barData = new BarData(barDataSet);
 
-        // Customize the chart appearance if needed
-        barChart.setData(barData);
+        barChart.setDrawGridBackground(false);
+        barChart.getXAxis().setDrawGridLines(false);
+        barChart.getAxisLeft().setDrawGridLines(false);
 
-        // Set labels for each bar
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("Year"); // Actual month
-        labels.add("Total");
-        labels.add("hhhh");
-        labels.add("heelo"); // Previous month
+        barChart.setData(barData);
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         xAxis.setGranularity(1);
 
-        barChart.invalidate(); // Refresh the chart
+
+        barChart.invalidate();
 
 
     }
