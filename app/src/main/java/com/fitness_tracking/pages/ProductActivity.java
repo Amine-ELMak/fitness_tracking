@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fitness_tracking.Dao.DatabaseHandler;
 import com.fitness_tracking.Dao.ProductAdapter;
+import com.fitness_tracking.Dao.SteepsCounter;
 import com.fitness_tracking.R;
 import com.fitness_tracking.auth.Register;
 import com.fitness_tracking.auth.SessionManager;
@@ -69,7 +70,7 @@ public class ProductActivity extends AppCompatActivity {
                 int id=item.getItemId();
 
                 if(id==R.id.person) {
-                    Intent intent4 = new Intent(ProductActivity.this, ProfileActivity.class);
+                    Intent intent4 = new Intent(ProductActivity.this, SteepsCounter.class);
                     startActivity(intent4);
                     return true;
 
