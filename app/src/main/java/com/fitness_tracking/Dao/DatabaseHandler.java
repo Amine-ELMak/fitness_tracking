@@ -20,6 +20,7 @@ import com.fitness_tracking.auth.Register;
 import com.fitness_tracking.entities.Exercice;
 import com.fitness_tracking.entities.Produit;
 import com.fitness_tracking.entities.Repat;
+import com.fitness_tracking.entities.Steps;
 import com.fitness_tracking.entities.User;
 import com.fitness_tracking.entities.Workout;
 import com.fitness_tracking.pages.WorkoutActivity;
@@ -57,6 +58,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     "path TEXT, " +
                     "description TEXT, " +
                     "id_user INTEGER, " +
+                    "FOREIGN KEY (id_user) REFERENCES USER(id)" +
+                    ");";
+    private static final String CREATE_TABLE_STEPS =
+            "CREATE TABLE IF NOT EXISTS STEPS (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "date INTEGER, " + // Changed "Date" to "INTEGER" for storing timestamp
+                    "steps INTEGER, " +
+                    "id_user INTEGER, " + // Added id_user column definition
                     "FOREIGN KEY (id_user) REFERENCES USER(id)" +
                     ");";
 
@@ -102,23 +111,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db)
-    {
+    public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_EXERCISE);
         db.execSQL(CREATE_TABLE_PRODUIT);
         db.execSQL(CREATE_TABLE_WORKOUT);
         db.execSQL(CREATE_TABLE_REPAT);
+        db.execSQL(CREATE_TABLE_STEPS);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
-    {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS User");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Exercice");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Workout");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Produit");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Repat");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS STEPS");
         onCreate(sqLiteDatabase);
     }
 
@@ -417,7 +426,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public long addProduit(Produit produit) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-
         contentValues.put("name", produit.getName());
         contentValues.put("calorie", produit.getCalorie());
         contentValues.put("proteine", produit.getProteine());
@@ -671,6 +679,128 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         sqLiteDatabase.close();
         return workoutsList;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    @SuppressLint("Range")
+    public List<Steps> getAllStepsForUser(long userId) {
+        List<Steps> stepsList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.query("STEPS", null, "id_user = ?", new String[]{String.valueOf(userId)}, null, null, null);
+
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        Steps steps = new Steps(
+                                cursor.getLong(cursor.getColumnIndex("id")),
+                                new Date(cursor.getLong(cursor.getColumnIndex("date"))),
+                                cursor.getInt(cursor.getColumnIndex("steps")),
+                                cursor.getLong(cursor.getColumnIndex("id_user"))
+                        );
+                        stepsList.add(steps);
+                    } while (cursor.moveToNext());
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+
+        sqLiteDatabase.close();
+        return stepsList;
+    }
+
+    public long addSteps(Steps steps) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("date", steps.getDate().getTime());
+        contentValues.put("steps", steps.getStep());
+        contentValues.put("id_user", steps.getIdUser());
+        long id = sqLiteDatabase.insert("STEPS", null, contentValues);
+
+        sqLiteDatabase.close();
+        return id;
+    }
+
+    public void updateSteps(Steps steps) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("date", steps.getDate().getTime());
+        contentValues.put("steps", steps.getStep());
+        contentValues.put("id_user", steps.getIdUser());
+
+        sqLiteDatabase.update("STEPS", contentValues, "id = ?", new String[]{String.valueOf(steps.getId())});
+
+        sqLiteDatabase.close();
+    }
+
+    public void deleteSteps(long id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete("STEPS", "id = ?", new String[]{String.valueOf(id)});
+
+        sqLiteDatabase.close();
+    }
+    @SuppressLint("Range")
+    public Steps getStepsByDate(Date date) {
+        Steps steps = null;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        List<Steps> stepsList = new ArrayList<>();
+
+        Cursor cursor = sqLiteDatabase.query(
+                "STEPS",
+                null,
+                "date = ?",
+                new String[]{String.valueOf(date.getTime())}, // Convert date to milliseconds
+                null,
+                null,
+                null
+        );
+
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    steps = new Steps(
+                            cursor.getLong(cursor.getColumnIndex("id")),
+                            new Date(cursor.getLong(cursor.getColumnIndex("date"))),
+                            cursor.getInt(cursor.getColumnIndex("steps")),
+                            cursor.getLong(cursor.getColumnIndex("id_user"))
+                    );
+                    stepsList.add(steps);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            sqLiteDatabase.close();
+        }
+
+        if (!stepsList.isEmpty()) {
+            return stepsList.get(0); // Return the first steps if found
+        }
+        return null; // Return null if no steps found for the given date
+    }
+    public int getCountStepByDate(Date date,Long userId){
+        List<Steps> s= this.getAllStepsForUser(userId);
+        int count=0;
+        for(Steps i :s){
+            if(!i.getDate().equals(date)){
+                count+=i.getStep();
+            }
+        }
+        return count;
     }
 
 }
