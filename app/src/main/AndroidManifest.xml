@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,10 @@
         </activity>
         <activity
             android:name=".pages.Home"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Dao.SteepsCounter"
             android:exported="false">
         </activity>
         <activity
