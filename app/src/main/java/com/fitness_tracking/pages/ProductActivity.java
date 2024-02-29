@@ -70,7 +70,7 @@ public class ProductActivity extends AppCompatActivity {
                 int id=item.getItemId();
 
                 if(id==R.id.person) {
-                    Intent intent4 = new Intent(ProductActivity.this, SteepsCounter.class);
+                    Intent intent4 = new Intent(ProductActivity.this, ProfileActivity.class);
                     startActivity(intent4);
                     return true;
 
