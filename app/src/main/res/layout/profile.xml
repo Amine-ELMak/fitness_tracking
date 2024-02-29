@@ -1,149 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView android:id="@+id/home"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="294dp">
-
-        <LinearLayout
-            android:background="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="45dp"
-                android:src="@drawable/baseline_add_24" />
-
-            <TextView
-                android:id="@+id/textViewName"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-
-                android:textSize="21sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </RelativeLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_width="313dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
+            android:layout_height="250dp"
+            android:background="#2196F3"
+            android:padding="20dp">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/baseline_add_24" />
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/profile_image" />
 
             <TextView
-                android:id="@+id/textViewEmail"
+                android:id="@+id/fullname_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Wiliam@gmail.com"
-                android:textStyle="bold" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/profile_image"
+
+                android:includeFontPadding="false"
+                android:text="replaec with name from DB"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/username_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fullname_field"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/profile_image"
+                android:includeFontPadding="false"
+                android:text="Member"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-100dp"
+            android:layout_width="match_parent"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                app:cardBackgroundColor="#00BCD4"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:src="@drawable/ic_baseline_monitor_weight_24" />
+
+                    <TextView
+                        android:id="@+id/weight_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:enabled="false"
+                        android:includeFontPadding="false"
+                        android:text="DB?"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/weight_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/weight_label"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        android:text="Weight(kg)"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                app:cardBackgroundColor="#00BCD4"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:src="@drawable/ic_baseline_height_24" />
+
+                    <TextView
+                        android:id="@+id/height_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:includeFontPadding="false"
+                        android:text="DB ?"
+                        android:enabled="false"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/height_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/height_label"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        android:text="Height(cm)"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Full Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/full_name_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name">
+
+                <TextView
+                    android:id="@+id/full_name_profile2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_baseline_person_24"
+                    android:drawablePadding="10dp"
+                    android:text="Full Name"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:padding="10dp"
+                    android:background="@drawable/box_for_texts" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email">
+
+                <TextView
+                    android:id="@+id/Email_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_baseline_email_24"
+                    android:drawablePadding="10dp"
+                    android:text="example@example.com"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:padding="10dp"
+                    android:background="@drawable/box_for_texts" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/signup_text_margin_top">
+
+                <RadioGroup
+                    android:id="@+id/radioGroupSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radioButtonMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:enabled="false"
+
+                        />
+
+                    <RadioButton
+                        android:layout_marginStart="25dp"
+
+                        android:id="@+id/radioButtonFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:enabled="false"
+                        />
+                </RadioGroup>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="25dp">
+            android:layout_marginBottom="10dp">
 
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/baseline_add_24" />
-
-            <TextView
-                android:id="@+id/textViewWeight"
+            <Button
+                android:id="@+id/signinbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="+266 225 225"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:text="Sign Out"
+                tools:ignore="MissingConstraints" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
-
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/baseline_add_24" />
-
-            <TextView
-                android:id="@+id/textViewHeight"
+            <Button
+                android:id="@+id/updatebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Add to group"
-                android:textStyle="bold" />
+                android:text="UPDATE" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
-
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/baseline_add_24" />
-
-            <TextView
-                android:id="@+id/textViewSex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Show all comments"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <include
+            layout="@layout/navbar"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/editButton"
-        android:textColor="#fff"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_marginTop="35dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Edit"/>
 
-    <include
-        layout="@layout/navbar"/>
-
-</LinearLayout>
+</ScrollView>

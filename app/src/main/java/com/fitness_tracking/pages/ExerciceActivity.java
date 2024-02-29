@@ -7,12 +7,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.fitness_tracking.Dao.DatabaseHandler;
 import com.fitness_tracking.Dao.ExerciceAdapter;
@@ -28,7 +32,6 @@ import com.fitness_tracking.auth.LoginActivity;
 import com.fitness_tracking.auth.Register;
 import com.fitness_tracking.auth.SessionManager;
 import com.fitness_tracking.entities.Exercice;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
@@ -47,68 +50,59 @@ public class ExerciceActivity extends AppCompatActivity {
     ExerciceAdapter listAdapter;
     List<Exercice> dataArrayList = new ArrayList<>();
     DatabaseHandler databaseHandler = new DatabaseHandler(this);
-    BottomNavigationView bottomNavigationView;
+
 
     Button btnAddImage;
     ImageView imagePreview;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercice);
 
+        ImageView iconGoBack = findViewById(R.id.icon_go_back);
+        ImageView iconAdd = findViewById(R.id.icon_add);
+
         ListView listView = findViewById(R.id.listviewExercice);
 
         Long id = SessionManager.getInstance().getCurrentUser().getId();
 
-        dataArrayList = databaseHandler.getAllExercicesForUser(id);
+        // Retrieve category information from intent
+        String category = getIntent().getStringExtra("category");
+
+        // Use the category information to query the database and fetch exercises
+        dataArrayList = databaseHandler.getExerciceByUserAndCategory(id, category);
+
+        //dataArrayList = databaseHandler.getAllExercicesForUser(id);
 
         listAdapter = new ExerciceAdapter(getApplicationContext(), this, dataArrayList);
 
         listView.setAdapter(listAdapter);
 
-        Button btnAddExercice = findViewById(R.id.btnAddExercice);
-
-
-        btnAddExercice.setOnClickListener(new View.OnClickListener() {
+        iconGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddExerciceDialog("Add Exercise", ExerciceActivity.this, null);
+                // Execute method when the user clicks the "Go Back" icon
+                // Example: onBackPressed();
+                System.out.println("go back is pressed ******************");
+                finish();
             }
         });
-        bottomNavigationView= findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.workout);
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        iconAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id=item.getItemId();
+            public void onClick(View v) {
+                // Execute method when the user clicks the "Add" icon
+                // Example: showAddDialog();
+                System.out.println("add is pressed ******************");
+                showAddExerciceDialog("Add Exercise", ExerciceActivity.this, null);
 
-                if(id==R.id.person) {
-                    Intent intent4 = new Intent(ExerciceActivity.this, ProfileActivity.class);
-                    startActivity(intent4);
-                    return true;
-
-                }else
-                if(id==R.id.home) {
-                    Intent intent4 = new Intent(ExerciceActivity.this, WorkoutActivity.class);
-                    startActivity(intent4);
-                    return true;
-
-                }else if(id==R.id.fitness) {
-                    Intent intent4 = new Intent(ExerciceActivity.this, ProductActivity.class);
-                    startActivity(intent4);
-                    return true;
-
-                }else if(id== R.id.workout){
-                    Toast.makeText(ExerciceActivity.this, "workout.", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
             }
         });
+
     }
 
     public void showAddExerciceDialog(String title, Context context, Exercice exerciceToEdit) {
@@ -119,6 +113,17 @@ public class ExerciceActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_add_exercice, null);
         dialogBuilder.setView(dialogView);
+
+        final Spinner spinner = dialogView.findViewById(R.id.spinnerCatgoryExercice);
+        List<String> categorys = new ArrayList<>();
+        categorys.add("Chest");
+        categorys.add("Abbs");
+        categorys.add("Arms");
+        categorys.add("Legs");
+        categorys.add("Cardio");
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, categorys);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
 
         final EditText editTextExerciceName = dialogView.findViewById(R.id.editTextExerciceName);
         final EditText editTextExerciceDescription = dialogView.findViewById(R.id.editTextExerciceDescription);
@@ -158,13 +163,15 @@ public class ExerciceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String exerciceName = editTextExerciceName.getText().toString();
+                String category = (String)spinner.getSelectedItem();
+                System.out.println(category);
                 String exerciceDescription = editTextExerciceDescription.getText().toString();
                 if (exerciceToEdit == null && selectedImageUri!=null) {
-                    Long idddd=saveExerciceToDatabase(exerciceName, copyImageToInternalStorage(selectedImageUri), exerciceDescription);
+                    Long idddd=saveExerciceToDatabase(exerciceName, copyImageToInternalStorage(selectedImageUri), exerciceDescription, category);
                     Toast.makeText(ExerciceActivity.this,""+idddd,Toast.LENGTH_SHORT);
                 } else{
 
-                    updateExerciceInDatabase(exerciceToEdit.getId(), exerciceName, exerciceToEdit.getPath(), exerciceDescription);
+                    updateExerciceInDatabase(exerciceToEdit.getId(), exerciceName, exerciceToEdit.getPath(), exerciceDescription, category);
                 }
 
                 alertDialog.dismiss();
@@ -174,9 +181,10 @@ public class ExerciceActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private Long saveExerciceToDatabase(String exerciceName, String exercicePath, String exerciceDescription) {
+    private Long saveExerciceToDatabase(String exerciceName, String exercicePath, String exerciceDescription, String category) {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
-        Exercice exercice = new Exercice(null, exerciceName, exercicePath, exerciceDescription, id);
+        Exercice exercice = new Exercice(null, exerciceName, exercicePath, exerciceDescription, id, category);
+        System.out.println(exercice.getCategory());
         Long saved = databaseHandler.addExercice(exercice);
         if (saved != -1) {
             finish();
@@ -229,9 +237,10 @@ public class ExerciceActivity extends AppCompatActivity {
         return destinationPath;
     }
 
-    private void updateExerciceInDatabase(Long exerciceId, String exerciceName, String exercicePath, String exerciceDescription) {
+    private void updateExerciceInDatabase(Long exerciceId, String exerciceName, String exercicePath, String exerciceDescription, String category) {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
-        Exercice exercice = new Exercice(exerciceId, exerciceName, exercicePath, exerciceDescription, id);
+        Exercice exercice = new Exercice(exerciceId, exerciceName, exercicePath, exerciceDescription, id, category);
         databaseHandler.updateExercice(exercice);
     }
+
 }

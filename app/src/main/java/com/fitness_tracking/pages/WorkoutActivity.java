@@ -32,6 +32,7 @@ import com.fitness_tracking.entities.Workout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,7 +61,15 @@ public class WorkoutActivity extends AppCompatActivity {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
 
         dataArrayList = databaseHandler.getAllWorkoutsForUser(id);
-        dataRepatArrayList=databaseHandler.getAllRepatsForUser(id);
+
+        Date today = new Date();
+        // Define the date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        // Format the date to string
+        String dateString = dateFormat.format(today);
+        dataRepatArrayList=databaseHandler.getRepatForDateAndUser(dateString,id);
+        //dataRepatArrayList=databaseHandler.getAllRepatsForUser(id);
+        System.out.println(dataRepatArrayList);
 
         listAdapter = new WorkoutAdapter(getApplicationContext(), this, dataArrayList);
         listRepatAdapter=new RepatAdapter(getApplicationContext(),this,dataRepatArrayList);
@@ -110,7 +119,7 @@ public class WorkoutActivity extends AppCompatActivity {
                     return true;
 
                 } else if (id == R.id.workout) {
-                    Intent intent4 = new Intent(WorkoutActivity.this, ExerciceActivity.class);
+                    Intent intent4 = new Intent(WorkoutActivity.this, CategoryActivity.class);
                     startActivity(intent4);
                     return true;
                 }
@@ -274,7 +283,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private void saveRepatDatabase(double wei,Long ProduitId) {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -2);
+        calendar.add(Calendar.DAY_OF_YEAR, -0);
         Date yesterday = calendar.getTime();
         Repat repat=new Repat(null,ProduitId,wei,yesterday,id);
         Long saved=databaseHandler.addRepat(repat);

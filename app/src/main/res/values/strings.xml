@@ -9,5 +9,10 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
-
+    <string name="chest">Unlock the power of your upper body with chest exercises. Strengthen your chest muscles and build confidence with every rep.</string>
+    <string name="arms">Sculpt and define your arms with targeted exercises. Feel the burn as you work towards stronger, more toned arms</string>
+    <string name="abbs">Tighten and tone your core with ab exercises. Strengthen your midsection and enhance your overall athleticism</string>
+    <string name="cardio"> Elevate your heart rate and boost your endurance with cardio workouts. Experience the exhilaration of a heart-pumping session</string>
+    <string name="legs"> Build strength and stability in your lower body with leg exercises. From squats to lunges, unleash the potential of your legs</string>
+    <string name="quote3">A year from now you may wish you had started today.</string>
 </resources>

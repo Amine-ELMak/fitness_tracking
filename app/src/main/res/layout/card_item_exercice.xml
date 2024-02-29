@@ -45,6 +45,17 @@
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/exerciceCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exerciceName"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="40dp"
+            android:text="Exercise Category"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
         <ImageButton
             android:id="@+id/btnDeleteExercice"
             android:layout_width="wrap_content"
