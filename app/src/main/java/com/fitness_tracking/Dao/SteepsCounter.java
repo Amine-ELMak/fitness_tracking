@@ -49,7 +49,7 @@ public class SteepsCounter extends AppCompatActivity implements SensorEventListe
     @Override
     protected void onPause() {
         super.onPause();
-        runing = false;
+        runing = true;
     }
 
     @Override
