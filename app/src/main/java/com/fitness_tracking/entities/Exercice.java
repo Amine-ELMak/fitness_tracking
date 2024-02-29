@@ -6,6 +6,8 @@ public class Exercice {
 
     String name;
 
+    String category;
+
     String path;
 
     String description;
@@ -48,16 +50,23 @@ public class Exercice {
         return description;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory( String categ) { this.category = categ; }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Exercice(Long id, String name, String path, String description, Long idUser) {
+    public Exercice(Long id, String name, String path, String description, Long idUser, String category) {
         this.id = id;
         this.name = name;
         this.path = path;
         this.description = description;
         this.idUser = idUser;
+        this.category = category;
     }
 
     public Exercice() {

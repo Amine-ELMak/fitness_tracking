@@ -7,6 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".pages.ExerciceActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#03A9F4"
+        app:title=""
+        app:titleTextColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Left-aligned icon -->
+            <ImageView
+                android:id="@+id/icon_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+            <!-- Title (centered) -->
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Exercice"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center"/>
+
+            <!-- Right-aligned icon -->
+            <ImageView
+                android:id="@+id/icon_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <ListView
         android:id="@+id/listviewExercice"
         android:layout_width="0dp"
@@ -14,24 +68,11 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddExercice"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/card_item_exercice">
     </ListView>
-
-    <Button
-        android:id="@+id/btnAddExercice"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="90dp"
-        android:background="@drawable/baseline_add_circle_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <include
-        layout="@layout/navbar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

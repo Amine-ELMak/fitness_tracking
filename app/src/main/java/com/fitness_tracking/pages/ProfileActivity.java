@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     String sex = "";
     DatabaseHandler databaseHandler;
     TextView textViewName ;
+    TextView textViewName2 ;
     TextView textViewEmail ;
     TextView textViewWeight ;
     TextView textViewHeight ;
@@ -57,21 +60,30 @@ public class ProfileActivity extends AppCompatActivity {
         sex = currentUser.getSex();
 
         // Initializing TextViews
-        textViewName = findViewById(R.id.textViewName);
-        textViewEmail = findViewById(R.id.textViewEmail);
-        textViewWeight = findViewById(R.id.textViewWeight);
-        textViewHeight = findViewById(R.id.textViewHeight);
-        textViewSex = findViewById(R.id.textViewSex);
+        textViewName = findViewById(R.id.fullname_field);
+        textViewName2 = findViewById(R.id.full_name_profile2);
+        textViewEmail = findViewById(R.id.Email_profile);
+        textViewWeight = findViewById(R.id.weight_label);
+        textViewHeight = findViewById(R.id.height_label);
+        RadioGroup radioGroup = findViewById(R.id.radioGroupSex);
 
         // Setting user information to TextViews
         textViewName.setText(name);
+        textViewName2.setText(name);
         textViewEmail.setText(email);
         textViewWeight.setText(String.valueOf(weight));
         textViewHeight.setText(String.valueOf(height));
-        textViewSex.setText(sex);
+        //textViewSex.setText(sex);
+        if (sex.equals("Male")) {
+            RadioButton maleRadioButton = findViewById(R.id.radioButtonMale);
+            maleRadioButton.setChecked(true);
+        } else if (sex.equals("Female")) {
+            RadioButton femaleRadioButton = findViewById(R.id.radioButtonFemale);
+            femaleRadioButton.setChecked(true);
+        }
 
         // Initializing Edit Profile Button and setting click listener
-        Button btnEditProfile = findViewById(R.id.editButton);
+        Button btnEditProfile = findViewById(R.id.updatebutton);
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

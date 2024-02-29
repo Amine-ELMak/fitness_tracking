@@ -42,12 +42,14 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
         }
 
         TextView exerciceName = view.findViewById(R.id.exerciceName);
+        TextView exerciceCategory = view.findViewById(R.id.exerciceCategory);
         TextView exerciceDescription = view.findViewById(R.id.exerciceDescription);
         ImageView image=view.findViewById(R.id.exerciceImage);
 
         if (listData != null) {
             exerciceName.setText(listData.getName());
             exerciceDescription.setText(listData.getDescription());
+            exerciceCategory.setText(listData.getCategory());
             Bitmap ee= BitmapFactory.decodeFile(listData.getPath());
             image.setImageBitmap(ee);
         }

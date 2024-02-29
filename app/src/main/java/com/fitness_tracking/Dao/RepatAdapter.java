@@ -42,13 +42,22 @@ public class RepatAdapter extends ArrayAdapter<Repat> {
             view = LayoutInflater.from(getContext()).inflate(R.layout.card_repat_item, parent, false);
         }
 
+        // declare vars for card
         TextView repatName = view.findViewById(R.id.repName);
         TextView repatWeight = view.findViewById(R.id.repWeight);
+        TextView repatCalorie = view.findViewById(R.id.repCal);
 
         if (repatData != null && repatData.getIdProduit()!=0) {
+            // our product
             Produit p=db.getProduitById(repatData.getIdProduit());
+
             repatName.setText(p.getName());
-            repatWeight.setText("Weight: " + repatData.getWeight());
+            repatWeight.setText("Weight: " + repatData.getWeight() + " g");
+
+            // calculate calories
+            double calories = p.getCalorie() * ( repatData.getWeight() / 100);
+            repatCalorie.setText("Calories: " +calories + " cal");
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String formattedDate = dateFormat.format(repatData.getDate());
 

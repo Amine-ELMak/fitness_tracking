@@ -58,6 +58,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     "path TEXT, " +
                     "description TEXT, " +
                     "id_user INTEGER, " +
+                    "category TEXT," +
                     "FOREIGN KEY (id_user) REFERENCES USER(id)" +
                     ");";
     private static final String CREATE_TABLE_STEPS =
@@ -257,6 +258,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
+    // to get calories for a user in a date
     public double getTotalWeightForDateAndUser(String date, long userId) {
         double total=0;
         List<Repat> repats=getAllRepatsForUser(userId);
@@ -267,6 +269,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
         return total;
+    }
+
+    public List<Repat> getRepatForDateAndUser(String date, long userId) {
+        List<Repat> repatArrayList=new ArrayList<>();
+        System.out.println("raw date is : --------------- "+ date);
+        List<Repat> repats=getAllRepatsForUser(userId);
+        System.out.println(repats);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for(Repat repat:repats){
+            System.out.println("pass**************************");
+            System.out.println("the date from DB is : --------------- "+ dateFormat.format(repat.getDate()));
+            if(date.equals(dateFormat.format(repat.getDate()))) {
+                repatArrayList.add(repat);
+            }
+        }
+        return repatArrayList;
     }
 
     public void updateUser(User user) {
@@ -298,6 +316,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put("path", exercice.getPath());
         contentValues.put("description", exercice.getDescription());
         contentValues.put("id_user", exercice.getIdUser());
+        contentValues.put("category", exercice.getCategory());
 
         sqLiteDatabase.update("EXERCICE", contentValues, "id = ?", new String[]{String.valueOf(exercice.getId())});
 
@@ -312,6 +331,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put("path", exercice.getPath());
         contentValues.put("description", exercice.getDescription());
         contentValues.put("id_user", exercice.getIdUser());
+        contentValues.put("category", exercice.getCategory());
 
         long id = sqLiteDatabase.insert("EXERCICE", null, contentValues);
 
@@ -340,7 +360,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 null, // HAVING
                 null // ORDER BY
         );
-
         if (cursor != null && cursor.moveToFirst()) {
             // Construct the Exercise object from the cursor data
             exercise = new Exercice(
@@ -348,7 +367,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("name")),
                     cursor.getString(cursor.getColumnIndex("path")),
                     cursor.getString(cursor.getColumnIndex("description")),
-                    cursor.getLong(cursor.getColumnIndex("id_user"))
+                    cursor.getLong(cursor.getColumnIndex("id_user")),
+                    cursor.getString(cursor.getColumnIndex("category"))
             );
             cursor.close();
         }
@@ -374,7 +394,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndex("name")),
                             cursor.getString(cursor.getColumnIndex("path")),
                             cursor.getString(cursor.getColumnIndex("description")),
-                            cursor.getLong(cursor.getColumnIndex("id_user"))
+                            cursor.getLong(cursor.getColumnIndex("id_user")),
+                            cursor.getString(cursor.getColumnIndex("category"))
                     );
                     exercicesList.add(exercice);
                 } while (cursor.moveToNext());
@@ -398,6 +419,88 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
+    public List<Exercice> getExerciceByCategory(String category) {
+        List<Exercice> exercicesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        try {
+            sqLiteDatabase = this.getReadableDatabase();
+
+            cursor = sqLiteDatabase.query("EXERCICE", null, "category = ?", new String[]{category}, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Exercice exercice = new Exercice(
+                            cursor.getLong(cursor.getColumnIndex("id")),
+                            cursor.getString(cursor.getColumnIndex("name")),
+                            cursor.getString(cursor.getColumnIndex("path")),
+                            cursor.getString(cursor.getColumnIndex("description")),
+                            cursor.getLong(cursor.getColumnIndex("id_user")),
+                            cursor.getString(cursor.getColumnIndex("category"))
+                    );
+                    exercicesList.add(exercice);
+                } while (cursor.moveToNext());
+
+                cursor.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close cursor and database connection
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (sqLiteDatabase != null) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return exercicesList;
+    }
+
+
+    @SuppressLint("Range")
+    public List<Exercice> getExerciceByUserAndCategory(long userId, String category) {
+        List<Exercice> exercicesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        try {
+            sqLiteDatabase = this.getReadableDatabase();
+
+            cursor = sqLiteDatabase.query("EXERCICE", null, "id_user = ? AND category = ?", new String[]{String.valueOf(userId), category}, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Exercice exercice = new Exercice(
+                            cursor.getLong(cursor.getColumnIndex("id")),
+                            cursor.getString(cursor.getColumnIndex("name")),
+                            cursor.getString(cursor.getColumnIndex("path")),
+                            cursor.getString(cursor.getColumnIndex("description")),
+                            cursor.getLong(cursor.getColumnIndex("id_user")),
+                            cursor.getString(cursor.getColumnIndex("category"))
+                    );
+                    exercicesList.add(exercice);
+                } while (cursor.moveToNext());
+
+                cursor.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close cursor and database connection
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (sqLiteDatabase != null) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return exercicesList;
+    }
+
+
+    @SuppressLint("Range")
     public List<Exercice> getAllExercices() {
         List<Exercice> exercicesList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -411,7 +514,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndex("name")),
                         cursor.getString(cursor.getColumnIndex("path")),
                         cursor.getString(cursor.getColumnIndex("description")),
-                        cursor.getLong(cursor.getColumnIndex("id_user"))
+                        cursor.getLong(cursor.getColumnIndex("id_user")),
+                        cursor.getString(cursor.getColumnIndex("category"))
                 );
                 exercicesList.add(exercice);
             } while (cursor.moveToNext());
@@ -435,6 +539,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         long id = sqLiteDatabase.insert("PRODUIT", null, contentValues);
 
+        //this.onUpgrade(sqLiteDatabase,1,2);
         sqLiteDatabase.close();
         return id;
     }
