@@ -241,6 +241,7 @@ public class ExerciceActivity extends AppCompatActivity {
         Long id = SessionManager.getInstance().getCurrentUser().getId();
         Exercice exercice = new Exercice(exerciceId, exerciceName, exercicePath, exerciceDescription, id, category);
         databaseHandler.updateExercice(exercice);
+        startActivity(getIntent());
     }
 
 }
