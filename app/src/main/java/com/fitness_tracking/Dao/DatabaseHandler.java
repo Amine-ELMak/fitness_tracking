@@ -353,7 +353,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = sqLiteDatabase.query(
                 "EXERCICE", // Table name
-                new String[] {"id", "name", "path", "description", "id_user"}, // Columns to retrieve
+                new String[] {"id", "name", "path", "description", "id_user", "category"}, // Columns to retrieve
                 "id=?", // Selection criteria (WHERE clause)
                 new String[] {String.valueOf(id)}, // Selection arguments
                 null, // GROUP BY
