@@ -114,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
                     return true;
 
                 } else if (id == R.id.workout) {
-                    Intent intent4 = new Intent(ProfileActivity.this, ExerciceActivity.class);
+                    Intent intent4 = new Intent(ProfileActivity.this, CategoryActivity.class);
                     startActivity(intent4);
                     return true;
                 }
