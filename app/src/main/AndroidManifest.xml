@@ -42,6 +42,10 @@
             android:name=".pages.ChartActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".pages.CategoryActivity"
+            android:exported="false">
+        </activity>
 
         <activity
             android:name=".auth.LoginActivity"
