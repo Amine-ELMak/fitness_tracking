@@ -31,7 +31,7 @@ public class SteepsCounter extends AppCompatActivity implements SensorEventListe
     DatabaseHandler db = new DatabaseHandler(this);
     private SensorManager sensorManager;
     private Sensor sensor;
-    private boolean runing = false;
+    private boolean runing = true;
     private int countSteeps;
     TextView count;
 
@@ -49,7 +49,7 @@ public class SteepsCounter extends AppCompatActivity implements SensorEventListe
     @Override
     protected void onPause() {
         super.onPause();
-        runing = true;
+        runing = false;
     }
 
     @Override
