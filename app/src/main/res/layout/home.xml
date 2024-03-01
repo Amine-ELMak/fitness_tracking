@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.WorkoutActivity">
+    tools:context=".pages.WorkoutActivity"
+    android:background="#edede9"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,18 +17,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/workoutBlock"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        >
 
         <TextView
             android:id="@+id/titleRepat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Repat"
+            android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="24sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"/>
+
+        <!--
+        android:divider="#CDCDC0"
+        -->
 
         <ListView
             android:id="@+id/repatListView"
@@ -35,21 +45,24 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="10.0sp"
             android:scrollbars="vertical"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/titleRepat"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/card_repat_item"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnAddRepat"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/baseline_add_circle_24"
+            android:src="@drawable/baseline_add_24"
+            android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,6 +76,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="70dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         >
 
         <TextView
@@ -70,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Workout"
+            android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -83,19 +99,22 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="10.0sp"
             android:scrollbars="vertical"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/titleWorkout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/card_workout_item"/>
 
-        <Button
+
+        <ImageButton
             android:id="@+id/btnAddWorkout"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/baseline_add_circle_24"
+            android:src="@drawable/baseline_add_24"
+            android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fitness_tracking.Dao.DatabaseHandler;
+import com.fitness_tracking.Dao.SteepsCounter;
 import com.fitness_tracking.R;
 import com.fitness_tracking.auth.SessionManager;
 import com.fitness_tracking.entities.User;
@@ -65,7 +66,8 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail = findViewById(R.id.Email_profile);
         textViewWeight = findViewById(R.id.weight_label);
         textViewHeight = findViewById(R.id.height_label);
-        RadioGroup radioGroup = findViewById(R.id.radioGroupSex);
+        textViewSex = findViewById(R.id.sexText);
+        //RadioGroup radioGroup = findViewById(R.id.radioGroupSex);
 
         // Setting user information to TextViews
         textViewName.setText(name);
@@ -73,15 +75,24 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail.setText(email);
         textViewWeight.setText(String.valueOf(weight));
         textViewHeight.setText(String.valueOf(height));
-        //textViewSex.setText(sex);
-        if (sex.equals("Male")) {
-            RadioButton maleRadioButton = findViewById(R.id.radioButtonMale);
-            maleRadioButton.setChecked(true);
-        } else if (sex.equals("Female")) {
-            RadioButton femaleRadioButton = findViewById(R.id.radioButtonFemale);
-            femaleRadioButton.setChecked(true);
-        }
+        textViewSex.setText(sex);
 
+        Button btnStep = findViewById(R.id.stepChart);
+        btnStep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = new Intent(ProfileActivity.this, ChartActivity.class);
+                startActivity(intent4);
+            }
+        });
+        Button teest = findViewById(R.id.stttt);
+        teest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = new Intent(ProfileActivity.this, test.class);
+                startActivity(intent4);
+            }
+        });
         // Initializing Edit Profile Button and setting click listener
         Button btnEditProfile = findViewById(R.id.updatebutton);
         btnEditProfile.setOnClickListener(new View.OnClickListener() {

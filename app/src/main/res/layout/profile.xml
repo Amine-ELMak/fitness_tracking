@@ -38,7 +38,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/username_field"
+                android:id="@+id/sexText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fullname_field"
@@ -180,15 +180,16 @@
 
                 <TextView
                     android:id="@+id/Email_profile"
+                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/box_for_texts"
                     android:drawableLeft="@drawable/ic_baseline_email_24"
                     android:drawablePadding="10dp"
+                    android:padding="10dp"
                     android:text="example@example.com"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:padding="10dp"
-                    android:background="@drawable/box_for_texts" />
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -249,6 +250,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
+            <Button
+                android:id="@+id/stepChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chart" />
+            <Button
+                android:id="@+id/stttt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test" />
+
 
         </LinearLayout>
 
