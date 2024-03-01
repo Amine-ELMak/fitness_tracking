@@ -14,5 +14,9 @@
 
 <!--colros for card-->
 <color name="whiteCardColor">#fff</color>
+<color name="grey">#B3AEAE</color>
+
+<color name="dark_blue">#3F51B5</color> <!-- Example dark blue color -->
+<color name="light_blue">#BBDEFB</color>
 
 </resources>
