@@ -573,7 +573,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void deleteProduit(long id) {
+
+
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        // Delete all rows from the "REPAT" table where "produit_id" matches the specified id
+        sqLiteDatabase.delete("REPAT", "id_produit = ?", new String[]{String.valueOf(id)});
 
         sqLiteDatabase.delete("PRODUIT", "id = ?", new String[]{String.valueOf(id)});
 
