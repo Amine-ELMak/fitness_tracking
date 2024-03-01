@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +53,7 @@ public class ProductActivity extends AppCompatActivity {
 
         listView.setAdapter(listAdapter);
 
-        Button btnAddProduct = findViewById(R.id.btnAddPr);
+        ImageButton btnAddProduct = findViewById(R.id.btnAddPr);
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
