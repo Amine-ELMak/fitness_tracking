@@ -85,6 +85,7 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
     private void deleteExercice(long exerciceId) {
         DatabaseHandler databaseHandler = new DatabaseHandler(getContext());
         Long id = SessionManager.getInstance().getCurrentUser().getId();
+        String cate=databaseHandler.getExerciseById(exerciceId).getCategory();
 
         List<Workout> worByIdExe=databaseHandler.getWorkoutByIdExercice(exerciceId,id);
 
@@ -95,7 +96,7 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
         databaseHandler.deleteExercice(exerciceId);
 
         this.clear();
-        this.addAll(databaseHandler.getAllExercicesForUser(id));
+        this.addAll(databaseHandler.getExerciceByUserAndCategory(id,cate));
         this.notifyDataSetChanged();
     }
 
