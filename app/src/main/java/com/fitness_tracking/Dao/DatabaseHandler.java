@@ -239,6 +239,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public List<Workout> getWorkoutByIdExercice(Long idExe,Long idUser){
+        List<Workout> allWorkouts=this.getAllWorkoutsForUser(idUser);
+        List<Workout> allWorByIdExe=new ArrayList<>();
+
+        for(Workout w:allWorkouts){
+            if(w.getIdExercice()==idExe){
+                allWorByIdExe.add(w);
+            }
+        }
+        return allWorByIdExe;
+    }
+
     public Set<String> getDistinctFormattedDatesForUser(long userId) {
         Set<String> formattedDateSet = new HashSet<>();
         List<Repat> repats = getAllRepatsForUser(userId);
