@@ -65,7 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail = findViewById(R.id.Email_profile);
         textViewWeight = findViewById(R.id.weight_label);
         textViewHeight = findViewById(R.id.height_label);
-        RadioGroup radioGroup = findViewById(R.id.radioGroupSex);
+        textViewSex = findViewById(R.id.sexText);
+        //RadioGroup radioGroup = findViewById(R.id.radioGroupSex);
 
         // Setting user information to TextViews
         textViewName.setText(name);
@@ -73,14 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail.setText(email);
         textViewWeight.setText(String.valueOf(weight));
         textViewHeight.setText(String.valueOf(height));
-        //textViewSex.setText(sex);
-        if (sex.equals("Male")) {
-            RadioButton maleRadioButton = findViewById(R.id.radioButtonMale);
-            maleRadioButton.setChecked(true);
-        } else if (sex.equals("Female")) {
-            RadioButton femaleRadioButton = findViewById(R.id.radioButtonFemale);
-            femaleRadioButton.setChecked(true);
-        }
+        textViewSex.setText(sex);
 
         // Initializing Edit Profile Button and setting click listener
         Button btnEditProfile = findViewById(R.id.updatebutton);
