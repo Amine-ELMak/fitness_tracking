@@ -89,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
         teest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent4 = new Intent(ProfileActivity.this, test.class);
+                Intent intent4 = new Intent(ProfileActivity.this, SteepsCounter.class);
                 startActivity(intent4);
             }
         });

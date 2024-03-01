@@ -2,6 +2,7 @@ package com.fitness_tracking.pages;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,7 +29,7 @@ public class test extends AppCompatActivity {
         db = new DatabaseHandler(this);
 
         PieChart pieChart = findViewById(R.id.pieChart);
-
+        TextView stpToday= findViewById(R.id.stpToday);
         // Example data (replace this with your actual data)
         int maxSteps = 1000;
         Date today = new Date();
@@ -43,7 +44,7 @@ public class test extends AppCompatActivity {
 
         Steps s= db.getStepsByDate(date);
         int stepsTaken = s.getStep();
-
+        stpToday.setText(""+stepsTaken);
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(stepsTaken, "Steps Taken"));
         entries.add(new PieEntry(maxSteps - stepsTaken, "Remaining Steps"));
@@ -56,13 +57,15 @@ public class test extends AppCompatActivity {
 
         pieChart.setData(data);
 
-        // Customize PieChart
         pieChart.getDescription().setEnabled(false);
         pieChart.setHoleRadius(50f); // Size of the hole in the center of the PieChart
         pieChart.setTransparentCircleRadius(55f); // Size of the transparent circle around the PieChart
-        pieChart.setEntryLabelColor(Color.BLACK); // Color of labels (e.g., Steps Taken, Remaining Steps)
+        pieChart.setEntryLabelColor(Color.TRANSPARENT); // Set label color to transparent
         pieChart.setEntryLabelTextSize(12f); // Size of labels
 
-        pieChart.invalidate(); // Refresh the chart
+// Disable drawing values (labels) on the chart
+        dataSet.setDrawValues(false);
+
+        pieChart.invalidate();
     }
 }
