@@ -36,8 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
     String sex = "";
     DatabaseHandler databaseHandler;
     TextView textViewName ;
-    TextView textViewName2 ;
-    TextView textViewEmail ;
+
+
     TextView textViewWeight ;
     TextView textViewHeight ;
     TextView textViewSex ;
@@ -63,8 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Initializing TextViews
         textViewName = findViewById(R.id.fullname_field);
-        textViewName2 = findViewById(R.id.full_name_profile2);
-        textViewEmail = findViewById(R.id.Email_profile);
+
+
         textViewWeight = findViewById(R.id.weight_label);
         textViewHeight = findViewById(R.id.height_label);
         textViewSex = findViewById(R.id.sexText);
@@ -72,8 +72,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Setting user information to TextViews
         textViewName.setText(name);
-        textViewName2.setText(name);
-        textViewEmail.setText(email);
+
+
         textViewWeight.setText(String.valueOf(weight));
         textViewHeight.setText(String.valueOf(height));
         textViewSex.setText(sex);
@@ -198,7 +198,7 @@ public class ProfileActivity extends AppCompatActivity {
                 SessionManager.getInstance().loginUser(updatedUser);
 
                 textViewName.setText(newName);
-                textViewEmail.setText(newEmail);
+
                 textViewWeight.setText(newWeight);
                 textViewHeight.setText(newHeight);
 
