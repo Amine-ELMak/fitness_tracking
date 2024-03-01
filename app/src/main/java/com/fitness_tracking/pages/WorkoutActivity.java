@@ -163,7 +163,12 @@ public class WorkoutActivity extends AppCompatActivity   implements SensorEventL
         }
 
         Steps s= databaseHandler.getStepsByDate(date);
-        int stepsTaken = s.getStep();
+        int stepsTaken= 0;
+        if(s!=null){
+            stepsTaken= s.getStep();
+        }else{
+            databaseHandler.addSteps(new Steps(null,todayy,stepsTaken,id));
+        }
 
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(stepsTaken));
