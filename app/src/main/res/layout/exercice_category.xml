@@ -66,7 +66,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFDD33"
+                    android:background="#53B1BD"
                     android:padding="10dp">
 
                     <TextView
@@ -76,7 +76,7 @@
                         android:layout_marginStart="24dp"
                         android:text="CHEST EXERCICE"
                         android:textColor="#000"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"
@@ -118,7 +118,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#39E7CD"
+                    android:background="#A1C8FB"
                     android:padding="10dp">
 
                     <TextView
@@ -128,7 +128,7 @@
                         android:layout_marginStart="24dp"
                         android:text="ARMS EXERCICE"
                         android:textColor="#000"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"
@@ -170,7 +170,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#5860E6"
+                    android:background="#53B1BD"
                     android:padding="10dp">
 
                     <TextView
@@ -180,7 +180,7 @@
                         android:layout_marginStart="24dp"
                         android:text="ABBS EXERCICE"
                         android:textColor="#000000"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"
@@ -222,7 +222,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#F43"
+                    android:background="#A1C8FB"
                     android:padding="10dp">
 
                     <TextView
@@ -232,7 +232,7 @@
                         android:layout_marginStart="24dp"
                         android:text="LEGS EXERCICE"
                         android:textColor="#000"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"
@@ -274,7 +274,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#158446"
+                    android:background="#53B1BD"
                     android:padding="10dp">
 
                     <TextView
@@ -284,7 +284,7 @@
                         android:layout_marginStart="24dp"
                         android:text="CARDIO"
                         android:textColor="#000"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints"
