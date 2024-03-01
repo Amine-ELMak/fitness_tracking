@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.fitness_tracking.Dao.DatabaseHandler;
 import com.fitness_tracking.Dao.SteepsCounter;
 import com.fitness_tracking.R;
+import com.fitness_tracking.auth.LoginActivity;
 import com.fitness_tracking.auth.SessionManager;
 import com.fitness_tracking.entities.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -77,6 +78,15 @@ public class ProfileActivity extends AppCompatActivity {
         textViewHeight.setText(String.valueOf(height));
         textViewSex.setText(sex);
 
+        Button signoutbtn = findViewById(R.id.signoutbtn);
+        signoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SessionManager.getInstance().logoutUser();
+                Intent intent4 = new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivity(intent4);
+            }
+        });
         Button btnStep = findViewById(R.id.stepChart);
         btnStep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,14 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent4);
             }
         });
-        Button teest = findViewById(R.id.stttt);
-        teest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent4 = new Intent(ProfileActivity.this, SteepsCounter.class);
-                startActivity(intent4);
-            }
-        });
+      
         // Initializing Edit Profile Button and setting click listener
         Button btnEditProfile = findViewById(R.id.updatebutton);
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
