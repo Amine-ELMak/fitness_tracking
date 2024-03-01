@@ -422,8 +422,8 @@ public class WorkoutActivity extends AppCompatActivity   implements SensorEventL
             int a =databaseHandler.getCountStepByDate(date,idUser);
             int b=intValue-a;
             System.out.println(b);
-            if(b >50 && b<70){
-                showNotification(this.getApplicationContext(), "Goal reached", "Bravo vous etes attiendre lobjectif ");
+            if(b >25 && b<70){
+                showNotification(this.getApplicationContext(), "Goal reached", "Congratulations, you have reached the goal");
 
             }
             if (existingSteps == null) {
@@ -464,7 +464,7 @@ public class WorkoutActivity extends AppCompatActivity   implements SensorEventL
             builder.setContentTitle(title)
                     .setContentText(message)
                     .setContentIntent(pendingIntent)
-                    .setSmallIcon(android.R.drawable.ic_dialog_info);
+                    .setSmallIcon(R.mipmap.ic_launcher);
 
             Notification notification = builder.build();
             notificationManager.notify(1, notification);
