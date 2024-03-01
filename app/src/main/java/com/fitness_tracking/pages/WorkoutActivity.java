@@ -189,11 +189,10 @@ public class WorkoutActivity extends AppCompatActivity   implements SensorEventL
         pieChart.setEntryLabelTextSize(12f); // Size of labels
         pieChart.getLegend().setEnabled(false);
 
-// Set text only in the center of the chart
-        pieChart.setDrawEntryLabels(false); // Disable drawing labels inside the pie
+        pieChart.setDrawEntryLabels(false);
         pieChart.setDrawCenterText(true);
-        pieChart.setCenterText(""+stepsTaken+"\n Steps"); // Replace this with your desired text
-        pieChart.setCenterTextSize(25f); // Set size of the center text
+        pieChart.setCenterText(""+stepsTaken+"\n Steps");
+        pieChart.setCenterTextSize(25f);
         pieChart.setCenterTextColor(Color.BLACK);
         pieChart.invalidate();
     }

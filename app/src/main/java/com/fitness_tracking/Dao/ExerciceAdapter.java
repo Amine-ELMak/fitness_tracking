@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fitness_tracking.R;
+import com.fitness_tracking.entities.Workout;
 import com.fitness_tracking.pages.ExerciceActivity;
 import com.fitness_tracking.auth.SessionManager;
 import com.fitness_tracking.entities.Exercice;
@@ -83,9 +84,15 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
 
     private void deleteExercice(long exerciceId) {
         DatabaseHandler databaseHandler = new DatabaseHandler(getContext());
-        databaseHandler.deleteExercice(exerciceId);
-
         Long id = SessionManager.getInstance().getCurrentUser().getId();
+
+        List<Workout> worByIdExe=databaseHandler.getWorkoutByIdExercice(exerciceId,id);
+
+        for(Workout w:worByIdExe){
+            databaseHandler.deleteWorkout(w.getId());
+        }
+
+        databaseHandler.deleteExercice(exerciceId);
 
         this.clear();
         this.addAll(databaseHandler.getAllExercicesForUser(id));
