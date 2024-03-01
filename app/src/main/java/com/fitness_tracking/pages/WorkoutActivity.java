@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class WorkoutActivity extends AppCompatActivity   implements SensorEventL
         String dateString = dateFormat.format(today);
         dataRepatArrayList=databaseHandler.getRepatForDateAndUser(dateString,id);
         //dataRepatArrayList=databaseHandler.getAllRepatsForUser(id);
-        System.out.println(dataRepatArrayList);
+        System.out.println("------------- here -------------- "+dataRepatArrayList);
 
         listAdapter = new WorkoutAdapter(getApplicationContext(), this, dataArrayList);
         listRepatAdapter=new RepatAdapter(getApplicationContext(),this,dataRepatArrayList);
@@ -98,9 +99,9 @@ public class WorkoutActivity extends AppCompatActivity   implements SensorEventL
         listView.setAdapter(listAdapter);
         listView1.setAdapter(listRepatAdapter);
 
-        Button btnAddWorkout = findViewById(R.id.btnAddWorkout);
+        ImageButton btnAddWorkout = findViewById(R.id.btnAddWorkout);
 
-        Button btnAddRepat= findViewById(R.id.btnAddRepat);
+        ImageButton btnAddRepat= findViewById(R.id.btnAddRepat);
 
         btnAddRepat.setOnClickListener(new View.OnClickListener() {
             @Override
