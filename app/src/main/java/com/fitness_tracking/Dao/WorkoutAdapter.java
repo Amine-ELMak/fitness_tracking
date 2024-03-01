@@ -98,4 +98,8 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
         this.notifyDataSetChanged();
 
     }
+
+
+
+
 }
